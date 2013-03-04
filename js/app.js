@@ -53,19 +53,31 @@
     };
 
     
-	$('#muscle-group-overview').live('pagebeforeshow', function(event, ui) {
-		$('#muscle-group-overview .main-page-heading').html(Lifting.settings.muscleGroup);
-    	//alert('First item in setlist: ' + Lifting.settings.setList[0].muscleGroup + " : " + Lifting.settings.setList[0].liftName);
-	});
+	// $('#muscle-group-overview').live('pagebeforeshow', function(event, ui) {
+	// 	$('#muscle-group-overview .main-page-heading').html(Lifting.settings.muscleGroup);
+	// });
 
-	$('#add-workout-muscle-group-lifts').live('pagebeforeshow', function(event, ui) {
-		$('#add-workout-muscle-group-lifts .main-page-heading').html(Lifting.settings.muscleGroup);
-		//$("#add-workout-muscle-group-lifts-list").html('');
+    $(document).on('pagebeforeshow', '#muscle-group-overview', function(event, ui) {
+        $('#muscle-group-overview .main-page-heading').html(Lifting.settings.muscleGroup);
+    });
+
+    $(document).on('pagebeforeshow', '#add-workout-muscle-group-lifts', function(event, ui) {
+        $('#add-workout-muscle-group-lifts .main-page-heading').html(Lifting.settings.muscleGroup);
+        //$("#add-workout-muscle-group-lifts-list").html('');
         $("div.collapsible-lifts-list").html('');
 
         Lifting.CreateLiftListAccordion(Lifting.settings.muscleGroup);
 
-	});
+    });
+
+	// $('#add-workout-muscle-group-lifts').live('pagebeforeshow', function(event, ui) {
+	// 	$('#add-workout-muscle-group-lifts .main-page-heading').html(Lifting.settings.muscleGroup);
+	// 	//$("#add-workout-muscle-group-lifts-list").html('');
+ //        $("div.collapsible-lifts-list").html('');
+
+ //        Lifting.CreateLiftListAccordion(Lifting.settings.muscleGroup);
+
+	// });
 
 
 }( window.Lifting = window.Lifting || {}, jQuery ));
