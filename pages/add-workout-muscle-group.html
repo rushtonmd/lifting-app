@@ -1,0 +1,32 @@
+<div data-role="panel" id="SideMenuPanel">
+    <ul data-role="listview"  data-icon="false">
+	    <li><a href="#sidepanel">HOME</a></li>
+	    <li><a href="#RecordSingleLiftPage">LIFTS</a></li>
+	    <li><a href="#sidepanel">SCHEDULE</a></li>
+	    <li><a href="#RecordSingleLiftPage">FRIENDS</a></li>
+	    <li><a href="#sidepanel">SETTINGS</a></li>
+	</ul>
+</div><!-- /panel -->
+
+<div data-role="header">
+	<a href="#add-new" data-role="button" data-icon="arrow-l" data-iconshadow="false" data-inline="true" data-direction="reverse" data-transition="slide" >Back</a>
+	<h1>WORKOUT</h1>
+	<a href="#SideMenuPanel" data-role="button" data-icon="gear" data-iconpos="notext" data-iconshadow="false" data-inline="true"></a>
+</div><!-- /header -->
+
+<div data-role="content">	
+	<div>
+		<h1 id="page-heading">SELECT</h1>
+		<p id="page-tagline">Do a workout or record a single lift</p>
+	</div>
+	<div>
+		<ul data-role="listview">
+		    <li><a href="#add-workout-muscle-group-lifts" onclick="Lifting.muscleGroup='CHEST'">CHEST</a></li>
+		    <li><a href="#add-workout-muscle-group-lifts" onclick="Lifting.muscleGroup='BACK'">BACK</a></li>
+		    <li><a href="#add-workout-muscle-group-lifts" onclick="Lifting.muscleGroup='SHOULDERS'">SHOULDERS</a></li>
+		    <li><a href="#RecordSingleLiftPage" onclick="Lifting.muscleGroup='LEGS'">LEGS</a></li>
+		    <li><a href="#RecordSingleLiftPage" onclick="Lifting.muscleGroup='ARMS'">ARMS</a></li>
+		    <li><a href="#RecordSingleLiftPage" onclick="Lifting.muscleGroup='ABS'">ABS</a></li>
+		</ul>
+	</div>
+</div><!-- /content -->

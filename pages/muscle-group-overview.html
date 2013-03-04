@@ -1,0 +1,58 @@
+
+	<div data-role="panel" id="SideMenuPanel">
+	    <ul data-role="listview"  data-icon="false">
+		    <li><a href="#sidepanel">HOME</a></li>
+		    <li><a href="#RecordSingleLiftPage">LIFTS</a></li>
+		    <li><a href="#sidepanel">SCHEDULE</a></li>
+		    <li><a href="#RecordSingleLiftPage">FRIENDS</a></li>
+		    <li><a href="#sidepanel">SETTINGS</a></li>
+		</ul>
+	</div><!-- /panel -->
+
+	<div data-role="header">
+		<a href="#" data-rel="back" data-role="button" data-icon="arrow-l" data-iconshadow="false" data-inline="true" data-direction="reverse" data-transition="slide" >Back</a>
+		<h1>OVERVIEW</h1>
+		<a href="#popupDialog" data-rel="popup" data-position-to="window" data-icon="plus" data-role="button" data-iconpos="notext" data-inline="true" data-icon="bars" data-transition="pop"></a>
+		<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+		    <div data-role="header" data-theme="a" class="ui-corner-top" style="min-width:300px;">
+		        <h1>Chest</h1>
+		    </div>
+		    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+		        <a href="#" data-role="button" data-rel="back" data-theme="b" >NEW WORKOUT</a>
+		        <a href="#" data-role="button" data-rel="back" data-theme="b" >SINGLE LIFT</a>
+		        <a href="#" data-role="button" data-rel="back" data-theme="e" >OTHER MUSCLE GROUP...</a>
+		        <a href="#" data-role="button" data-rel="back" data-transition="flow" >CANCEL</a>
+		    </div>
+		</div>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<div>
+			<h1 class="main-page-heading">CHEST</h1>
+			<p id="page-tagline">WORKOUT DUE: 1 DAY</p>
+		</div>
+		<div class="scrollable-section-header ui-icon-alt">  <!-- Section Header -->
+			<a class="left-arrow" href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true"></a>
+			<span>WEEKLY AVERAGES</span>
+			<a class="right-arrow" href="#SideMenuPanel" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-iconshadow="false"></a>
+		</div>
+		<div id="chart_div" style="width: 100%px; height: 200px;margin-bottom:40px;"></div>
+		<div class="scrollable-section-header ui-icon-alt">  <!-- Section Header -->
+			<a class="left-arrow" href="#SideMenuPanel" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-iconshadow="false"></a>
+			<span>LAST WORKOUT</span>
+			<a class="right-arrow" href="#SideMenuPanel" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-iconshadow="false"></a>
+
+		</div>
+	</br>
+		<div> 
+			<ul data-role="listview">
+			    <li><a href="#" data-transition="slide">BENCH PRESS (DECLINE)<span style="float:right; margin-right:20px">210</span></a></li>
+			    <li><a href="#" data-transition="slide">BENCH PRESS (FLAT)
+        			<span style="float:right; margin-right:20px">185</span></a></li>
+			    <li><a href="#" data-transition="slide">DIPS
+        			<span style="float:right; margin-right:20px">215</span></a></li>
+			    <li><a href="#" data-transition="slide">FLYS
+        			<span style="float:right; margin-right:20px">125</span></a></li>
+			</ul>
+		</div>
+	</div><!-- /content -->
