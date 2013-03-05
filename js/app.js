@@ -1,6 +1,7 @@
 // Define the global namespace: Lifting
 (function( Lifting, $, undefined ) {
 
+
     Lifting.settings = {
         setList: new Array(),
         muscleGroup: "",
@@ -32,13 +33,26 @@
 
         _.each(_.keys(l), function(key){
             var node = $('<div data-role="collapsible" ><h3>' + key + '</h3></div>');
-            var uList = $('<ul data-role="listview" data-inset="false"></ul>');
+
+            var uList = $('<table class="lifts-accordion-expanded"></table>');
             _.each(l[key],function(set){
-                uList.append('<li><div> SET ' + set.setNumber + 
-                    '<a href="#" data-role="button"  data-inline="true" data-mini="true" class="reps-button">' + set.weight + 'lbs</a>' + 
-                    '<a href="#" data-role="button"  data-inline="true" data-mini="true" class="reps-button">' + set.reps + 'x</a>' +
-                    '</div></li>')
+                uList.append('<tr><th>SET ' + set.setNumber + '</th>' + 
+                    '<td><a href="#" data-role="button">' + set.reps + 'x</a>' + '</td>' +
+                    '<td><a href="#" data-role="button">' + set.weight + 'lbs</a>' + '</td>' +
+                    
+                    '<td><input type="checkbox" class="large-checkbox" name="checkbox-0 "/></td>' + 
+                    '</tr>')
             });
+
+
+
+            // var uList = $('<ul data-role="listview" data-inset="false"></ul>');
+            // _.each(l[key],function(set){
+            //     uList.append('<li><div> SET ' + set.setNumber + 
+            //         '<a href="#" data-role="button"  data-inline="true" data-mini="true" class="reps-button">' + set.weight + 'lbs</a>' + 
+            //         '<a href="#" data-role="button"  data-inline="true" data-mini="true" class="reps-button">' + set.reps + 'x</a>' +
+            //         '</div></li>')
+            // });
             node.append(uList);
             $("div.collapsible-lifts-list").append(node);
         });
@@ -58,6 +72,7 @@
 	// });
 
     $(document).on('pagebeforeshow', '#muscle-group-overview', function(event, ui) {
+        console.log('test');
         $('#muscle-group-overview .main-page-heading').html(Lifting.settings.muscleGroup);
     });
 
@@ -81,3 +96,4 @@
 
 
 }( window.Lifting = window.Lifting || {}, jQuery ));
+

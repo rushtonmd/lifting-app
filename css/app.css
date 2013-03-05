@@ -51,3 +51,32 @@
 	float: right;
 }
 
+.lifts-accordion-expanded {
+	width:100%;
+	vertical-align: middle;
+}
+
+.lifts-accordion-expanded th{
+	width: 4em;
+	height:3em;
+	padding-right: 20px;
+}
+
+.lifts-accordion-expanded td{
+	padding: 1px 5px;
+}
+
+.lifts-accordion-expanded .ui-checkbox {
+	text-align: center;
+	width:2em;
+}
+
+.lifts-accordion-expanded .large-checkbox{
+	position: relative;
+	left:0px;
+	margin: 0;
+	width: 2em;
+	height: 2em;
+}
+
+
