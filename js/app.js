@@ -27,6 +27,42 @@
     // 	this.date = new Date();[["A",40],["B",20],["C",40]]
     // };
 
+    Lifting.AddSetToMuscleGroup = function(muscleGroup, liftName){
+
+        var maxSet = _.max(_.filter(Lifting.settings.setList, function(set){ return (set.muscleGroup === muscleGroup && set.liftName === liftName)}) , function(set){ return set.setNumber; });
+
+        Lifting.settings.setList.push({workout: 1, muscleGroup: muscleGroup, liftName: liftName, setNumber: maxSet.setNumber + 1 , reps: 5, weight: 100});
+        
+        return _.last(Lifting.settings.setList);
+
+    };
+
+    Lifting.AddSetRowToList = function(uList, set){
+
+        var newRow = $('<tr></tr>');
+
+        var repInput = $('<input name="rep" name="number" pattern="[0-9]*" value="' + set.reps + '"/>"');
+
+        repInput.on( "change", function(event, ui) { set.reps = this.value; });
+
+        var weightInput = $('<input name="weight" name="number" pattern="[0-9]*" value="' + set.weight + '"/>"');
+        
+        weightInput.on( "change", function(event, ui) { set.weight = this.value; });
+
+        var checkInput = $('<input type="checkbox" class="large-checkbox" name="checkbox-0" />');
+        
+        checkInput.on( "change", function(event, ui) { }); 
+
+        newRow.append('<th>SET ' + set.setNumber + '</th>');
+        newRow.append($('<td></td>').append(repInput));
+        newRow.append($('<td></td>').append(weightInput));
+        newRow.append($('<td></td>').append(checkInput));
+
+        uList.append(newRow);
+
+        uList.trigger('create');
+    };
+
     Lifting.CreateLiftListAccordion = function(muscleGroup){
         var counter = 0;
         var l = _.groupBy(_.filter(Lifting.settings.setList, function(set){ return set.muscleGroup === Lifting.settings.muscleGroup}) , function(set){ return set.liftName; });
@@ -35,14 +71,34 @@
             var node = $('<div data-role="collapsible" ><h3>' + key + '</h3></div>');
 
             var uList = $('<table class="lifts-accordion-expanded"></table>');
+
             _.each(l[key],function(set){
-                uList.append('<tr><th>SET ' + set.setNumber + '</th>' + 
-                    '<td><a href="#" data-role="button">' + set.reps + 'x</a>' + '</td>' +
-                    '<td><a href="#" data-role="button">' + set.weight + 'lbs</a>' + '</td>' +
-                    
-                    '<td><input type="checkbox" class="large-checkbox" name="checkbox-0 "/></td>' + 
-                    '</tr>')
+
+                var newRow = $('<tr></tr>');
+
+                var repInput = $('<input name="rep" name="number" pattern="[0-9]*" value="' + set.reps + '"/>"');
+
+                repInput.on( "change", function(event, ui) { set.reps = this.value; });
+
+                var weightInput = $('<input name="weight" name="number" pattern="[0-9]*" value="' + set.weight + '"/>"');
+                
+                weightInput.on( "change", function(event, ui) { set.weight = this.value; });
+
+                var checkInput = $('<input type="checkbox" class="large-checkbox" name="checkbox-0" />');
+                
+                checkInput.on( "change", function(event, ui) { }); 
+
+                
+                newRow.append('<th>SET ' + set.setNumber + '</th>');
+                newRow.append($('<td></td>').append(repInput));
+                newRow.append($('<td></td>').append(weightInput));
+                newRow.append($('<td></td>').append(checkInput));
+
+                uList.append(newRow);
+
             });
+            
+            
 
 
 
@@ -54,7 +110,16 @@
             //         '</div></li>')
             // });
             node.append(uList);
-            $("div.collapsible-lifts-list").append(node);
+
+            var addButton = $('<button>ADD NEW SET</button>');
+
+            addButton.on( "click", function(event, ui) { 
+                //alert('Add to : ' + key);
+                var newSet = Lifting.AddSetToMuscleGroup(muscleGroup, key);
+                Lifting.AddSetRowToList(uList, newSet)
+            });
+
+            $("div.collapsible-lifts-list").append(node.append(addButton));
         });
 
         $("div.collapsible-lifts-list").trigger('create');
