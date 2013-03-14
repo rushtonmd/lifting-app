@@ -1,30 +1,30 @@
-google.load("visualization", "1", {packages:["corechart"]});
-google.setOnLoadCallback(drawChart);
+// google.load("visualization", "1", {packages:["corechart"]});
+// google.setOnLoadCallback(drawChart);
 
-function drawChart() { 
-	var data = google.visualization.arrayToDataTable([
-	  ['Week', 'Weight'],
-	  ['Week 1',  160],
-	  ['Week 2',  170],
-	  ['Week 3',  175],
-	  ['Week 4',  205]
-	]);
+// function drawChart() { 
+// 	var data = google.visualization.arrayToDataTable([
+// 	  ['Week', 'Weight'],
+// 	  ['Week 1',  160],
+// 	  ['Week 2',  170],
+// 	  ['Week 3',  175],
+// 	  ['Week 4',  205]
+// 	]);
 
-	var options = {
-		legend: {position: 'none'},
-	  title: '',
-	  animation:{
-	    duration: 1000,
-	    easing: 'in',
-	  },
-	  hAxis: {title: 'Year', titleTextStyle: {color: 'red'}},
-	  colors:['#80FF09'],
-	  backgroundColor: 'none'
-	};
+// 	var options = {
+// 		legend: {position: 'none'},
+// 	  title: '',
+// 	  animation:{
+// 	    duration: 1000,
+// 	    easing: 'in',
+// 	  },
+// 	  hAxis: {title: 'Year', titleTextStyle: {color: 'red'}},
+// 	  colors:['#80FF09'],
+// 	  backgroundColor: 'none'
+// 	};
 
-	var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-	chart.draw(data, options);
-}
+// 	var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+// 	chart.draw(data, options);
+// }
 
 // Define the global namespace: Lifting
 (function( Lifting, $, undefined ) {

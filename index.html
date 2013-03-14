@@ -3,6 +3,8 @@
 	<head>
   <meta charset="UTF-8">	
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+
 	<title>Page Title</title> 
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -19,9 +21,19 @@
 
  	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
- 	<script src="js/app.js"></script>
+ 	<!-- <script src="js/app.js"></script> -->
 
- 	<script src="test/sample-data.js"></script>
+ 	<!-- Using this script to load the app.js is by default not-cached, so it gets around the caching issues that were seen when adding the app to the iPhone home screen -->
+ 	<script type="text/javascript">
+	 	$.getScript("js/app.js")
+	 	.done(function(data, textStatus, jqxhr) {
+	   		// Load sample data
+	   		$.getScript("test/sample-data.js")
+		});
+
+ 	</script>
+
+ 	<!-- <script src="test/sample-data.js"></script> -->
 
 
 
@@ -69,21 +81,21 @@
 				$('#muscle-map').trigger('pagecreate');
 			});
 			
-			$('#add-new').load('pages/add-new.html', function(){
+			$('#add-single-lift').load('pages/add-single-lift.html', function(){
 				//$('#add-new').trigger('pagecreate');
 			});
 
-			$('#add-workout-muscle-group').load('pages/add-workout-muscle-group.html', function(){
-				//$('#add-workout-muscle-group').trigger('pagecreate');
-			});
+			// $('#add-workout-muscle-group').load('pages/add-workout-muscle-group.html', function(){
+			// 	$('#add-workout-muscle-group').trigger('pagecreate');
+			// });
 
 			$('#add-workout-muscle-group-lifts').load('pages/add-workout-muscle-group-lifts.html', function(){
 				//$('#add-workout-muscle-group-lifts').trigger('pagecreate');
 			})
 
-			$('#muscle-group-overview').load('pages/muscle-group-overview.html', function(){
-				//$('#muscle-group-overview').trigger('pagecreate');
-			});
+			// $('#muscle-group-overview').load('pages/muscle-group-overview.html', function(){
+			// 	$('#muscle-group-overview').trigger('pagecreate');
+			// });
 		    
 		});
 
@@ -101,6 +113,8 @@
 	<div data-role="page" id="add-new"></div>
 
 	<div data-role="page" id="add-workout-muscle-group"></div>
+
+	<div data-role="page" id="add-single-lift"></div>
 
 	
 

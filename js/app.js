@@ -56,7 +56,7 @@
 
         newRow.append('<th>SET ' + set.setNumber + '</th>');
         newRow.append($('<td></td>').append(repInput));
-        newRow.append('<td></td>'); // Temporary
+        newRow.append('<td>x</td>'); // Temporary
         newRow.append($('<td></td>').append(weightInput));
         newRow.append('<td>lbs</td>'); // Temporary
         newRow.append($('<td></td>').append(checkInput));
