@@ -31,6 +31,7 @@
 
         var maxSet = _.max(_.filter(Lifting.settings.setList, function(set){ return (set.muscleGroup === muscleGroup && set.liftName === liftName)}) , function(set){ return set.setNumber; });
 
+
         Lifting.settings.setList.push({workout: 1, muscleGroup: muscleGroup, liftName: liftName, setNumber: maxSet.setNumber + 1 , reps: 5, weight: 100});
         
         return _.last(Lifting.settings.setList);
@@ -55,7 +56,9 @@
 
         newRow.append('<th>SET ' + set.setNumber + '</th>');
         newRow.append($('<td></td>').append(repInput));
+        newRow.append('<td></td>'); // Temporary
         newRow.append($('<td></td>').append(weightInput));
+        newRow.append('<td>lbs</td>'); // Temporary
         newRow.append($('<td></td>').append(checkInput));
 
         uList.append(newRow);
@@ -74,41 +77,10 @@
 
             _.each(l[key],function(set){
 
-                var newRow = $('<tr></tr>');
-
-                var repInput = $('<input name="rep" name="number" pattern="[0-9]*" value="' + set.reps + '"/>"');
-
-                repInput.on( "change", function(event, ui) { set.reps = this.value; });
-
-                var weightInput = $('<input name="weight" name="number" pattern="[0-9]*" value="' + set.weight + '"/>"');
-                
-                weightInput.on( "change", function(event, ui) { set.weight = this.value; });
-
-                var checkInput = $('<input type="checkbox" class="large-checkbox" name="checkbox-0" />');
-                
-                checkInput.on( "change", function(event, ui) { }); 
-
-                
-                newRow.append('<th>SET ' + set.setNumber + '</th>');
-                newRow.append($('<td></td>').append(repInput));
-                newRow.append($('<td></td>').append(weightInput));
-                newRow.append($('<td></td>').append(checkInput));
-
-                uList.append(newRow);
+                Lifting.AddSetRowToList(uList, set);
 
             });
-            
-            
 
-
-
-            // var uList = $('<ul data-role="listview" data-inset="false"></ul>');
-            // _.each(l[key],function(set){
-            //     uList.append('<li><div> SET ' + set.setNumber + 
-            //         '<a href="#" data-role="button"  data-inline="true" data-mini="true" class="reps-button">' + set.weight + 'lbs</a>' + 
-            //         '<a href="#" data-role="button"  data-inline="true" data-mini="true" class="reps-button">' + set.reps + 'x</a>' +
-            //         '</div></li>')
-            // });
             node.append(uList);
 
             var addButton = $('<button>ADD NEW SET</button>');
@@ -137,7 +109,7 @@
 	// });
 
     $(document).on('pagebeforeshow', '#muscle-group-overview', function(event, ui) {
-        console.log('test');
+        //console.log('test');
         $('#muscle-group-overview .main-page-heading').html(Lifting.settings.muscleGroup);
     });
 
@@ -149,6 +121,8 @@
         Lifting.CreateLiftListAccordion(Lifting.settings.muscleGroup);
 
     });
+
+
 
 	// $('#add-workout-muscle-group-lifts').live('pagebeforeshow', function(event, ui) {
 	// 	$('#add-workout-muscle-group-lifts .main-page-heading').html(Lifting.settings.muscleGroup);

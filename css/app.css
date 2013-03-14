@@ -57,9 +57,9 @@
 }
 
 .lifts-accordion-expanded th{
-	width: 4em;
-	height:3em;
-	padding-right: 20px;
+	width: 3em;
+	/* height:3em;
+	padding-right: 20px;*/
 }
 
 .lifts-accordion-expanded td{
@@ -80,7 +80,7 @@
 }
 
 .lifts-accordion-expanded div.ui-input-text {
-	width: 30px;
+	/* width: 30px; */
 	margin-left: 5px;	
 }
 
