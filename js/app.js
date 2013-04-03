@@ -13,6 +13,9 @@
               //alert(key + " " + val.liftName);
             });
             return $.unique(returnList);
+        },
+        currentWorkoutNumber: function(){
+            return _.max(Lifting.settings.setList, function(set){return set.workout;}).workout;
         }
     }
 
@@ -27,6 +30,35 @@
     // 	this.date = new Date();[["A",40],["B",20],["C",40]]
     // };
 
+    Lifting.FinishCurrentWorkout = function(muscleGroup){
+        // Needs to take all the sets for the current muscle group where workout = -1, add a date, and increment the workout number
+        // but...
+        // we also need to keep the current workout=-1 sets for the next workout (pre-filled)
+        // So we don't really need to convert anything, we just need to add new workouts to the incremented counter... ahhhhh yes.
+
+        
+
+        var currentSets = _.filter(Lifting.settings.setList, function(set){ return (set.workout === -1 && set.muscleGroup === muscleGroup)});
+        var workout = Lifting.settings.currentWorkoutNumber() + 1;
+        
+        $.each(currentSets, function(key, val) {
+          //$("#" + i).append(document.createTextNode(" - " + val));
+          //if(val.muscleGroup == muscleGroup) returnList.push(val.liftName);
+
+          var newSet = _.clone(val);
+          newSet.workout = workout;
+
+          // Is this going to work?!?!
+          Lifting.settings.setList.push(newSet);
+
+          // alert(key + " " + val.liftName);
+        });
+
+        return currentSets.length + " sets added! GET SWOLE!";
+
+    };
+
+
     Lifting.AddSetToMuscleGroup = function(muscleGroup, liftName){
 
         var maxSet = _.max(_.filter(Lifting.settings.setList, function(set){ return (set.muscleGroup === muscleGroup && set.liftName === liftName)}) , function(set){ return set.setNumber; });
@@ -34,7 +66,7 @@
 
         if ($.isNumeric(maxSet.setNumber)) newSetNumber = maxSet.setNumber + 1;
 
-        Lifting.settings.setList.push({workout: 1, muscleGroup: muscleGroup, liftName: liftName, setNumber: newSetNumber , reps: 5, weight: 100});
+        Lifting.settings.setList.push({workout: -1, muscleGroup: muscleGroup, liftName: liftName, setNumber: newSetNumber , reps: 5, weight: 100});
         
         return _.last(Lifting.settings.setList);
 
@@ -70,7 +102,7 @@
 
     Lifting.CreateLiftListAccordion = function(muscleGroup){
         var counter = 0;
-        var l = _.groupBy(_.filter(Lifting.settings.setList, function(set){ return set.muscleGroup === muscleGroup}) , function(set){ return set.liftName; });
+        var l = _.groupBy(_.filter(Lifting.settings.setList, function(set){ return set.workout === -1 && set.muscleGroup === muscleGroup}) , function(set){ return set.liftName; });
 
         _.each(_.keys(l), function(key){
             var node = $('<div data-role="collapsible" ><h3>' + key + '</h3></div>');
@@ -133,6 +165,15 @@
         $('#muscle-group-overview .main-page-heading').html(Lifting.settings.muscleGroup);
     });
 
+    $(document).on('pagecreate', '#add-workout-muscle-group-lifts', function(event, ui) {
+
+        $('a.finish-button').off('click').on( "click", function(event, ui) { 
+            alert(Lifting.FinishCurrentWorkout(Lifting.settings.muscleGroup));
+            //console.log('WTF');
+        });
+
+    });
+
     $(document).on('pagebeforeshow', '#add-workout-muscle-group-lifts', function(event, ui) {
         $('#add-workout-muscle-group-lifts .main-page-heading').html(Lifting.settings.muscleGroup);
         //$("#add-workout-muscle-group-lifts-list").html('');
@@ -163,22 +204,11 @@
         $('#add-single-lift .main-page-heading').html(Lifting.settings.muscleGroup);
 
         newLiftName = $('input[name="newLiftName"]').val();
-        numberOfSets = $('input[name="numberOfSets"]').val('5');
+        numberOfSets = $('input[name="numberOfSets"]').val('4');
 
         Lifting.CreateLiftTypeDropDown($('select[name="lift-types-drop-list"]'), Lifting.settings.muscleGroup);
 
     });
-
-
-
-	// $('#add-workout-muscle-group-lifts').live('pagebeforeshow', function(event, ui) {
-	// 	$('#add-workout-muscle-group-lifts .main-page-heading').html(Lifting.settings.muscleGroup);
-	// 	//$("#add-workout-muscle-group-lifts-list").html('');
- //        $("div.collapsible-lifts-list").html('');
-
- //        Lifting.CreateLiftListAccordion(Lifting.settings.muscleGroup);
-
-	// });
 
 
 }( window.Lifting = window.Lifting || {}, jQuery ));
