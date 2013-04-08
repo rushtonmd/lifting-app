@@ -88,16 +88,26 @@
         
         checkInput.on( "change", function(event, ui) { }); 
 
+        var deleteButton = $('<a href="#" data-role="button" data-theme="r" data-inline="true">DELETE</a>');
+        deleteButton.on( "click", function(event, ui) { Lifting.RemoveSetFromList(set, newRow)});
+
         newRow.append('<th>SET ' + set.setNumber + '</th>');
         newRow.append($('<td></td>').append(repInput));
         newRow.append('<td>x</td>'); // Temporary
         newRow.append($('<td></td>').append(weightInput));
         newRow.append('<td>lbs</td>'); // Temporary
         newRow.append($('<td></td>').append(checkInput));
+        newRow.append($('<td></td>').append(deleteButton));
 
         uList.append(newRow);
 
         uList.trigger('create');
+    };
+
+    Lifting.RemoveSetFromList = function(set, newRow){
+        Lifting.settings.setList.splice(_.indexOf(Lifting.settings.setList, set), 1);
+        alert('removed!');
+        newRow.remove();
     };
 
     Lifting.CreateLiftListAccordion = function(muscleGroup){
@@ -171,6 +181,27 @@
             alert(Lifting.FinishCurrentWorkout(Lifting.settings.muscleGroup));
             //console.log('WTF');
         });
+
+
+
+        // Swipe to delete
+        $('table.lifts-accordion-expanded tr').off('click').on( "click", function(event, ui) { 
+            // Show delete button
+            //alert('TEST');
+            $('table.lifts-accordion-expanded tr').append('<button class="delete-button">DELETE</button>');
+            //alert(Lifting.FinishCurrentWorkout(Lifting.settings.muscleGroup));
+            //console.log('WTF');
+        });
+
+        // Swipe to delete
+        $('table.lifts-accordion-expanded tr').off('click').on( "click", function(event, ui) { 
+            // Remove delete button
+            $('table.lifts-accordion-expanded tr').find('.delete-button').remove();
+            //alert(Lifting.FinishCurrentWorkout(Lifting.settings.muscleGroup));
+            //console.log('WTF');
+        });
+
+
 
     });
 
